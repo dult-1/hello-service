@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by dult on 2021-11-1.
@@ -20,9 +21,15 @@ public class HelloController {
     @RequestMapping("/hello")
     public String hello(){
         List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("hello-service");
-        for(ServiceInstance instance:serviceInstanceList){
-            System.out.println(" hello,host:"+instance.getHost()+" serverid:"+instance.getServiceId());
+        //测试超时
+        int sleepTime = new Random().nextInt(3000);
+        System.out.println("sleepTime:" + sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println(" hello,host:"+serviceInstanceList.get(0).getHost()+" serverid:"+serviceInstanceList.get(0).getServiceId());
         return "hello eureka "+System.currentTimeMillis();
     }
 
