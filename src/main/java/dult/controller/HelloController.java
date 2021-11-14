@@ -22,13 +22,13 @@ public class HelloController {
     public String hello(){
         List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("hello-service");
         //测试超时
-        int sleepTime = new Random().nextInt(3000);
-        System.out.println("sleepTime:" + sleepTime);
-        try {
-            Thread.sleep(sleepTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        int sleepTime = new Random().nextInt(3000);
+//        System.out.println("sleepTime:" + sleepTime);
+//        try {
+//            Thread.sleep(sleepTime);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         System.out.println(" hello,host:"+serviceInstanceList.get(0).getHost()+" serverid:"+serviceInstanceList.get(0).getServiceId());
         return "hello eureka "+System.currentTimeMillis();
     }
